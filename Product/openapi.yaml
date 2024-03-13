@@ -1,0 +1,138 @@
+openapi: 3.0.0
+info:
+  title: Product Service API
+  description: CRUD operations for managing products
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /products/:productId:
+    parameters:
+      - name: productId
+        in: path
+        required: true
+        description: ID of the product to perform operation on
+        schema:
+          type: string
+    put:
+      summary: Update product by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        '200':
+          description: Successful operation
+    get:
+      summary: Get product by ID
+      responses:
+        '200':
+          description: Successful operation
+  /products/{retailerId}:
+    parameters:
+      - name: retailerId
+        in: path
+        required: true
+        description: ID of the retailer to get products for
+        schema:
+          type: string
+    delete:
+      summary: Get products by retailer ID
+      responses:
+        '200':
+          description: Successful operation
+  /products/:retailerId:
+    parameters:
+      - name: retailerId
+        in: path
+        required: true
+        description: ID of the retailer to create products for
+        schema:
+          type: string
+    post:
+      summary: Create a new product of
+      
+       a retailer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product created successfully
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        category:
+          type: string
+          description: Category of the product
+        title:
+          type: string
+          description: Title of the product
+        description:
+          type: string
+          description: Description of the product
+        quantity:
+          type: integer
+          minimum: 0
+          description: Quantity of the product available
+        images:
+          type: array
+          items:
+            type: string
+          description: URLs of images for the product
+        price:
+          type: number
+          format: float
+          minimum: 0
+          description: Price of the product
+        size:
+          type: string
+          description: Size of the product
+        retailerId:
+          type: string
+          description: ID of the retailer
+      required:
+        - category
+        - title
+        - price
+        - retailerId
+    ProductUpdate:
+      type: object
+      properties:
+        category:
+          type: string
+          description: Category of the product
+        title:
+          type: string
+          description: Title of the product
+        description:
+          type: string
+          description: Description of the product
+        quantity:
+          type: integer
+          minimum: 0
+          description: Quantity of the product available
+        images:
+          type: array
+          items:
+            type: string
+          description: URLs of images for the product
+        price:
+          type: number
+          format: float
+          minimum: 0
+          description: Price of the product
+        size:
+          type: string
+          description: Size of the product
+      required:
+        - category
+        - title
+        - price
