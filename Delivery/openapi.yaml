@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Delivery Service API
+  description: CRUD operations for managing deliveries
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /deliveries/{deliveryId}:
+    parameters:
+      - name: deliveryId
+        in: path
+        required: true
+        description: ID of the delivery to perform operation on
+        schema:
+          type: string
+    get:
+      summary: Get delivery by ID
+      responses:
+        "200":
+          description: Successful operation
+    put:
+      summary: Update delivery by ID (admin only)
+      parameters:
+        - name: adminId
+          in: query
+          required: true
+          description: ID of the admin performing the update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Delivery"
+      responses:
+        "200":
+          description: Successful operation
+    delete:
+      summary: Delete delivery by ID (admin only)
+      parameters:
+        - name: adminId
+          in: query
+          required: true
+          description: ID of the admin performing the delete
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Delivery deleted successfully
+  /deliveries/user/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        description: ID of the user to get deliveries for
+        schema:
+          type: string
+    get:
+      summary: Get deliveries by user ID
+      responses:
+        "200":
+          description: Successful operation
+  /deliveries/customer/{customerId}:
+    parameters:
+      - name: customerId
+        in: path
+        required: true
+        description: ID of the customer to get deliveries for
+        schema:
+          type: string
+    get:
+      summary: Get deliveries by customer ID
+      responses:
+        "200":
+          description: Successful operation
+  /deliveries/admin/{adminId}:
+    parameters:
+      - name: adminId
+        in: path
+        required: true
+        description: ID of the admin to get deliveries for
+        schema:
+          type: string
+    get:
+      summary: Get deliveries by admin ID
+      responses:
+        "200":
+          description: Successful operation
+  /deliveries:
+    post:
+      summary: Create a new delivery (admin only)
+      parameters:
+        - name: adminId
+          in: query
+          required: true
+          description: ID of the admin creating the delivery
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Delivery"
+      responses:
+        "201":
+          description: Delivery created successfully
+components:
+    schemas:
+      Delivery:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          customerId:
+            type: string
+            description: ID of the customer associated with the delivery
+          objectId:
+            type: string
+            description: ID of the object being delivered
+          expectedDate:
+            type: string
+            format: date-time
+            description: Expected delivery date
+        required:
+          - customerId
+          - objectId
+          - expectedDate
