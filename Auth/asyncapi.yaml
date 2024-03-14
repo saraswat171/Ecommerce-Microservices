@@ -1,0 +1,57 @@
+asyncapi: 2.6.0
+#Info of the application
+info:
+  title: E-commerce User
+  version: '1.0'
+  description: User Async API
+channels:
+  auth.users_added:
+    publish:
+      description: Publish the event to add new user
+      summary: Inform that a new user has been added
+      operationId: UserAdded
+      message:
+        $ref: "#/components/messages/UserSignedUp"
+components:
+  messages:
+    UserSignedUp:
+      name: UserSignedUp
+      title: User added event
+      summary: Inform about a new user added in system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f
+            description: Unique ID for the object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          user:
+            $ref: '#/components/schemas/UserPayload'
+  schemas:
+    UserPayload:
+      title: Signed Up user
+      type: object
+      description: All the data required for user authentication and authorization
+      required:
+        - uuid
+        - role
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique ID for the user
+        role:
+          type: string
+          description: Role of user
+          enum:
+            - USER
+            - RETAILER
+            - RETAILERMANAGER
+            - DELIEVERYPARTNER
+            - DELIVERYMANAGER
+            - SUPERADMIN

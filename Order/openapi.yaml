@@ -67,6 +67,29 @@ paths:
       responses:
         '200':
           description: Successful operation
+
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
     put:
       tags:
         - Cart
@@ -87,6 +110,28 @@ paths:
       responses:
         '204':
           description: Order deleted successfully
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
  
 components:
      schemas:

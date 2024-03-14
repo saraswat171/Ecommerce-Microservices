@@ -7,7 +7,7 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /usersinfo:
+  /signup:
     post:
       tags:
       - "Auth"
@@ -43,8 +43,7 @@ paths:
                     error:
                       type: string
                       example: The provided email already exists
-        '404':
-          description: 'Not Found: This response is shown if the request for information is not there or it could not be imported'
+      
         '500':
           description: Internal server error
           content:
@@ -57,7 +56,7 @@ paths:
         '400':
          description: Fields are required
 
-  /logininfo:
+  /signin:
     post:
       tags:
         - Auth

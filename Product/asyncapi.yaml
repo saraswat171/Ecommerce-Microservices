@@ -1,0 +1,122 @@
+asyncapi: 2.6.0
+
+#Info of the application
+info:
+  title: Product Service
+  version: "1.0"
+  description: Product Service
+
+channels:
+  product.product_added:
+    publish:
+      description: The product details when vendor add it
+      summary: The product details to create
+      message:
+        $ref: "#/components/messages/ProductAdded"
+  product.product_updated:
+    publish:
+      description: The product details when vendor update it
+      summary: The product details in updation
+      message:
+        $ref: "#/components/messages/ProductAdded"
+  product.product_deleted:
+    publish:
+      description: The product details when vendor delete it
+      summary: The product details in deletion
+      message:
+        $ref: "#/components/messages/ProductAdded"
+components:
+  messages:
+    ProductAdded:
+      name: ProductAdded
+      title: Product added event
+      summary: Inform about a product added in the system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f
+            description: Unique ID for the Object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          student:
+            $ref: "#/components/schemas/ProductPayload"
+    ProductUpdated:
+      name: ProductUpdated
+      title: Product update event
+      summary: Inform about a product updated in the system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f
+            description: Unique ID for the Object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          student:
+            $ref: "#/components/schemas/ProductPayload"
+    ProductDeleted:
+      name: ProductDeleted
+      title: Product delete event
+      summary: Inform about a product deleted in the system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f
+            description: Unique ID for the Object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          student:
+            $ref: "#/components/schemas/ProductPayload"
+
+  schemas:
+    ProductPayload:
+      title: The product object
+      type: object
+      description: The product object holds all the data of product
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique ID for the Object
+        name:
+          type: string
+          description: Credential for the campus plattform
+        desc:
+          type: string
+          description: An Email Address
+          example: user_name@domain.com
+        images:
+          type: array
+          items:
+            type: string
+          description: Images of product
+        category:
+          type: string
+          description: Address of user
+          example: user_name@domain.com
+        userId:
+          type: string
+          description: uuid of the vendor
+        price:
+          type: number
+          description: Price of the product
+        stock:
+          type: number
+          description: Number of the products available
+        size:
+          type: number
+          description: Size of the product

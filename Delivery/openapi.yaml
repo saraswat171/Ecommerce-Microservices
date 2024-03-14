@@ -19,6 +19,28 @@ paths:
       responses:
         "200":
           description: Successful operation
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
     put:
       summary: Update delivery by ID (admin only)
       parameters:
@@ -37,6 +59,28 @@ paths:
       responses:
         "200":
           description: Successful operation
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
     delete:
       summary: Delete delivery by ID (admin only)
       parameters:
@@ -49,6 +93,28 @@ paths:
       responses:
         "204":
           description: Delivery deleted successfully
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
   /deliveries/user/{userId}:
     parameters:
       - name: userId
@@ -62,6 +128,28 @@ paths:
       responses:
         "200":
           description: Successful operation
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential
   /deliveries/customer/{customerId}:
     parameters:
       - name: customerId
@@ -75,6 +163,28 @@ paths:
       responses:
         "200":
           description: Successful operation
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
   /deliveries/admin/{adminId}:
     parameters:
       - name: adminId
@@ -88,6 +198,29 @@ paths:
       responses:
         "200":
           description: Successful operation
+
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: User Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
   /deliveries:
     post:
       summary: Create a new delivery (admin only)
@@ -107,6 +240,28 @@ paths:
       responses:
         "201":
           description: Delivery created successfully
+        '404':
+          description: 'Not Found:  This response is shown if the request for information is not there or it could not be imported'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data Not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal server error
+        '400':
+         description:  Invalid or incorrect credential  
 components:
     schemas:
       Delivery:
