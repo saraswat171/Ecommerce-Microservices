@@ -1,0 +1,207 @@
+asyncapi: 2.6.0
+
+#Info of the application
+info:
+  title: E-commerce User 
+  version: '1.0'
+  description: User Async API
+
+channels:
+  user.user_added:
+    publish:
+      description: Publish the event to add new user
+      summary: Inform that a new user has been added by admin
+      operationId: UserAdded
+      message: 
+        $ref: "#/components/messages/UserAdded"
+
+  user.user_updated:
+    publish:
+      description: Publish the event to update user details
+      summary: Inform that a user has been updated (password)
+      operationId: UserUpdated
+      message: 
+        $ref: "#/components/messages/UserUpdated"
+  
+  user.user_status_updated:
+    publish:
+      description: Publish the event to update user status ('active')
+      summary: Inform that user statsu has been updated
+      operationId: UserStatusUpdated
+      message: 
+        $ref: "#/components/messages/UserStatusUpdated"
+  
+  user.user_deleted:
+    publish:
+      description: Publish the event to soft delete user
+      summary: Inform that user has been deleted
+      operationId: UserDeleted
+      message: 
+        $ref: "#/components/messages/UserDeleted"
+  
+  auth.user_registered:
+    subscribe:
+      description: Subscribe to the event to add new user
+      summary: Add a new user
+      operationId: UserSignedUp
+      message:
+        $ref: '#/components/messages/UserSignedUp'
+
+
+components:
+  messages:
+    UserAdded:
+      name: UserAdded
+      title: User added event
+      summary: Inform about a new user added in system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f 
+            description: Unique ID for the object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          user:
+            $ref: '#/components/schemas/UserDetails'
+
+    UserUpdated:
+      name: UserUpdated
+      title: User updated event
+      summary: Inform about a new user updated in system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f 
+            description: Unique ID for the object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          user:
+            $ref: '#/components/schemas/UserDetails'
+
+    UserStatusUpdated:
+      name: UserStatusUpdated
+      title: User status updated
+      summary: Inform about a user is updated 
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f 
+            description: Unique ID for the object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          user:
+            $ref: '#/components/schemas/UserDetails'
+    
+    UserDeleted:
+      name: UserDeleted
+      title: User deleted event
+      summary: Inform about a user deleted in system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f 
+            description: Unique ID for the object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          user:
+            $ref: '#/components/schemas/UserDetails'
+
+    UserSignedUp:
+      name: UserSignedUp
+      title: User added event
+      summary: Inform about a new user added in system
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f 
+            description: Unique ID for the object
+          fired_at:
+            type: string
+            format: date-time
+            description: Date that the event was fired
+          user:
+            $ref: '#/components/schemas/UserPayload'
+
+
+
+  schemas:
+    UserPayload:
+      title: New user details
+      type: object
+      description: New user details
+      required:
+        - email
+        - name
+        - password
+      properties:
+        password:
+          type: string
+          description: Password of user
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+
+    UserDetails:
+      title: User details
+      type: object
+      description: All the data required by other services of user
+      required:
+        - uuid
+        - role
+        - name
+        - password
+        - email
+        - status
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique ID for the user
+        role:
+          type: string
+          description: Role of user
+          enum:
+            - USER
+            - RETAILER
+            - ADMIN
+          example: USER
+        password:
+          type: string
+          description: Password of user
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        status:
+          type: string
+          enum: 
+            - ACTIVE
+            - INACTIVE
