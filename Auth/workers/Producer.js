@@ -16,7 +16,7 @@ class Producer {
         const exchangeName = config.rabbitMQ.exchangeName;
         await this.channel.assertExchange(exchangeName, "direct");
 
-        const logDetails = {
+        const authDetails = {
             logType: routingKey,
             message: message,
             dateTime: new Date(),
@@ -24,7 +24,7 @@ class Producer {
         await this.channel.publish(
             exchangeName,
             routingKey,
-            Buffer.from(JSON.stringify({ logDetails }))
+            Buffer.from(JSON.stringify({ authDetails }))
         );
 
         console.log(`the message ${message} is sent to exchange ${exchangeName} and routing key is ${routingKey}`);
