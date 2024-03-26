@@ -15,7 +15,7 @@ function ProductForm() {
     <Stack gap={1}>
         <Text text='Product Gallery'  textProp={{ sx:{ fontSize: '16px',fontWeight:'600' } }}  />
         <Box>
-        <DropzoneArea
+        <DropzoneArea></DropzoneArea>
   acceptedFiles={['image/*']}
   dropzoneText={"Drag and drop an image here or click"}
   onChange={(files) => console.log('Files:', files)}
