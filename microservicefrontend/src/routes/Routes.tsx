@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import AddProduct from "../pages/AddProduct";
 import Settings from "../pages/Settings";
+import Orders from "../pages/Orders";
 const routes: RouteObject[] = [
     {
         path: '/',
@@ -41,6 +42,10 @@ const routes: RouteObject[] = [
             {
                 path: 'settings',
                 element: <Settings />
+            },
+            {
+                path: 'orders',
+                element: <Orders />
             }
         ]
     },
