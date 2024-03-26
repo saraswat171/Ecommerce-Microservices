@@ -26,6 +26,7 @@ exports.signUp = async (payload) => {
 }
 
 exports.login = async (payload) => {
+ try{
     const { email, password } = payload.body;
     if (!email || !password)
         throw new CustomError("User credentials not found", 401);
@@ -37,4 +38,21 @@ exports.login = async (payload) => {
         return { success: true, user, token };
     }
     throw new CustomError("Incorrect Password", 404);
+ }
+ catch (err) {
+   
+ throw err;
+}
+}
+
+exports.signUpUpdate = async (payload) => {
+  try{
+  const uuid = payload.uuid;
+ const  userDetails = UsersModel.findByIdAndUpdate(uuid , {userService:true})
+
+  }
+
+   
+
+    
 }

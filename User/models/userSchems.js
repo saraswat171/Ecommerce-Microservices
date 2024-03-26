@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    uuid: {
+    uuid: { //uuid from auth publish data
         type: String,
         required: true,
     },
@@ -22,9 +22,22 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ["User", "Admin", "Vendor"]
     },
-    address: {
+    username: {
+        type: String,
+      default:name
+    },
+    house_no:{
+       type:Number,
+    },
+    city: {
         type: String,
     },
+    state: {
+        type: String,
+    },
+    pincode:{
+        type:Number,
+     },
     phone: {
         type: Number,
     },

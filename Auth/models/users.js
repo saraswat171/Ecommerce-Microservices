@@ -19,7 +19,10 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
 
-
+    userService:{
+        type:Boolean,
+        default:false
+    }
 
 },{timestamps:true })
 
