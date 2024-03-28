@@ -6,8 +6,10 @@ import { Outlet } from 'react-router-dom'
 function Sidebarlayout() {
   return (
     <Stack flexDirection={'row'} >
-      <Sidebar />
-      <Stack flexDirection={'column'} width={'100%'}>
+     <Stack sx={{width:'20%'}}>
+     <Sidebar />
+     </Stack>
+      <Stack flexDirection={'column'} sx={{width: '80%'}}>
         <Header />
         <Outlet />
       </Stack>

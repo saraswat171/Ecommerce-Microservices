@@ -8,6 +8,7 @@ import SignUp from "../pages/SignUp";
 import AddProduct from "../pages/AddProduct";
 import Settings from "../pages/Settings";
 import Orders from "../pages/Orders";
+import ShowProduct from "../pages/ShowProduct";
 const routes: RouteObject[] = [
     {
         path: '/',
@@ -46,6 +47,10 @@ const routes: RouteObject[] = [
             {
                 path: 'orders',
                 element: <Orders />
+            },
+            {
+                path: 'products',
+                element: <ShowProduct />
             }
         ]
     },

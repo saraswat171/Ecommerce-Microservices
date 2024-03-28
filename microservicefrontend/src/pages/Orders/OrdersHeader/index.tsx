@@ -9,6 +9,7 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Text from '../../../components/Text';
 import OrderStatusFilter from '../../../components/Filter';
+import BreadCumbsheader from '../../../components/BreadCumbsheader';
 
 function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     event.preventDefault();
@@ -19,34 +20,7 @@ function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
 
 function OrdersHeader() {
     const [selectedOrderStatus, setSelectedOrderStatus] = useState('');
-    const breadcrumbs = [
-        <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick} sx={{ p: '0' }}>
-            <Text text='Home'
-                textProp={{
-                    sx: {
-                        fontSize: '16px',
-                        fontWeight: '600', lineHeight: '21.79px'
-                    }
-                }}></Text>
-        </Link>,
-        <Link
-            underline="hover"
-            key="2"
-            color="inherit"
-            href="/"
-            onClick={handleClick}
-        >
 
-            <Text text='Orders List'
-                textProp={{
-                    sx: {
-                        fontSize: '16px',
-                        fontWeight: '600', lineHeight: '21.79px'
-                    }
-                }}></Text>
-        </Link>,
-      
-    ];
 
     const handleFilterChange = (OrderStatus:string ) => {
         console.log('OrderStatus: ', OrderStatus);
@@ -59,13 +33,10 @@ function OrdersHeader() {
             <Text text='Orders List'
                 textProp={{ sx: { fontSize: '24px', fontWeight: '600', lineHeight: '28.44px' } }}></Text>
            <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
-           <Breadcrumbs
-                separator={<NavigateNextIcon />}
-                aria-label="breadcrumb"
-            >
-                {breadcrumbs} 
-            
-            </Breadcrumbs>
+         
+            <BreadCumbsheader textStyles={{sx:{height:'32px' , width:'183px'}, fontSize:"24px", fontWeight:"600", lineHeight:"28.44px"}}
+    text={'Order List'} breadcrumb = {[{text: 'Home', link : '/'}]}/>
+
             <Box display={'flex'} flexDirection={'row'} gap={'5px'} alignItems={'center'}>
                 <CalendarMonthOutlinedIcon sx={{ height: '24px', width: '24px' }} />
                 <Typography fontWeight={500} fontSize={'16px'} lineHeight={'21px'}  >

@@ -10,7 +10,7 @@ interface TextProps {
 const Text:React.FC<TextProps>=({text,Icons,textProp,iconProp}) =>{
   return (
   
-  <Stack flexDirection={'row'} gap={'8px'} alignItems={'center'}>
+  <Stack flexDirection={'row'} gap={'8px'} alignItems={'center'} >
      {Icons && React.cloneElement(Icons,iconProp) }
     <Typography {...textProp} >
         {text}

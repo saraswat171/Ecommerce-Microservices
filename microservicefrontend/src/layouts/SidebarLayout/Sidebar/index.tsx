@@ -28,8 +28,8 @@ function Sidebar() {
         setOpenchat(!openchat);
     };
     return (
-        <Stack flexDirection={'column'} width={'325px'} height={'100vh'} sx={{ borderRight:'1px solid black' }} >
-            <Box sx={{ mb: '40px', mt: '20px', pl: '47px' }}>
+        <Stack flexDirection={'column'}  height={'100vh'} sx={{ borderRight:'1px solid black' }} >
+            <Box sx={{ mb: '40px', mt: '20px', pl: '37px' }}>
                 <Text
                     text='InstaCart'
                     Icons={<FilterVintageIcon />}
@@ -37,7 +37,7 @@ function Sidebar() {
                     textProp={{ sx: { fontSize: '22px' } }}
                 />
             </Box>
-            <Stack flexDirection={'column'} width={'268px'} pl={'20px'} margin={'auto'} mt={'0'} mb={'0'} >
+            <Stack flexDirection={'column'} width={'80%'} pl={'10px'} margin={'auto'} mt={'0'} mb={'0'} >
                 <List
                     component="nav"
                     aria-labelledby="nested-list-subheader"
