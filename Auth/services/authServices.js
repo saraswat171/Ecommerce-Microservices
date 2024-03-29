@@ -14,7 +14,7 @@ exports.signUp = async (payload) => {
     if (!name)
         throw new CustomError("User role name found", 401);
     if (!role)
-        throw new CustomError("User role not found", 401);
+        throw new CustomError(" User role not found", 401);
     const existingUser = await UsersModel.findOne({ email })
     if (existingUser)
         throw new CustomError("Email already exist", 409);
@@ -45,14 +45,14 @@ exports.login = async (payload) => {
 }
 }
 
-exports.signUpUpdate = async (payload) => {
-  try{
-  const uuid = payload.uuid;
- const  userDetails = UsersModel.findByIdAndUpdate(uuid , {userService:true})
+// exports.signUpUpdate = async (payload) => {
+//   try{
+//   const uuid = payload.uuid;
+//  const  userDetails = UsersModel.findByIdAndUpdate(uuid , {userService:true})
 
-  }
+//   }
 
    
 
     
-}
+// }

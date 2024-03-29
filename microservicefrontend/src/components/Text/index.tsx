@@ -1,9 +1,9 @@
 import { ButtonProps, Stack, SvgIconProps, Typography, TypographyProps } from '@mui/material'
 import React, { ReactElement } from 'react'
 interface TextProps {
-  text:string;
+  text?:string;
   Icons?:ReactElement<SvgIconProps>;
-  textProp:TypographyProps;
+  textProp?:TypographyProps;
   iconProp?:SvgIconProps;
   buttonProp?:ButtonProps;
   }

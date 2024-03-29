@@ -5,6 +5,8 @@ const { productProcessor } = require('../processor');
 const processors = {
     "NewUser": productProcessor.createUser,
 };
+
+
 class Consumer {
     async consumeMessage() {
         const connection = await amqp.connect(config.rabbitMQ.url)
