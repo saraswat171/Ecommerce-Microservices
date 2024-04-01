@@ -13,7 +13,7 @@ export type FormData = {
 
 export const UserSchema = z
   .object({
-    name: z.string().min(1, {message: "Please enter your name"}),
+   
     email: z.string().email(),
     password: z
       .string()

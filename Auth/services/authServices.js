@@ -5,6 +5,7 @@ const UsersModel = require('../models/users')
 const Producer = require('../workers/Producer')
 const { v4: uuidv4 } = require('uuid');
 const produce = new Producer()
+require("dotenv").config();
 exports.signUp = async (payload) => {
     const { email, password, role, name } = payload.body;
     if (!email)
@@ -21,7 +22,7 @@ exports.signUp = async (payload) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const uuid = uuidv4();
     const response = await UsersModel.create({ email, password: hashedPassword, role, uuid, name });
-    produce.publishMessage("Signup", response)
+    produce.publishMessage("Signup", response,"NewUser")
     return response;
 }
 
@@ -35,6 +36,7 @@ exports.login = async (payload) => {
         throw new CustomError("User doesn't exist", 404);
     if (bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({ ID: user._id }, process.env.tokenKey);
+        console.log('token: ', token);
         return { success: true, user, token };
     }
     throw new CustomError("Incorrect Password", 404);
@@ -45,14 +47,15 @@ exports.login = async (payload) => {
 }
 }
 
-// exports.signUpUpdate = async (payload) => {
-//   try{
-//   const uuid = payload.uuid;
-//  const  userDetails = UsersModel.findByIdAndUpdate(uuid , {userService:true})
-
-//   }
-
-   
-
-    
-// }
+exports.signUpUpdate = async (payload) => {
+    try {
+      const uuid = payload;
+      console.log('uuid: ', uuid);
+      const user = await UsersModel.findOne({ uuid });
+      const userDetails = await UsersModel.findByIdAndUpdate(user._id, { userService: true }).exec();
+      console.log('userDetails: ', userDetails);
+      return userDetails;
+    } catch (err) {
+      throw err;
+    }
+  }

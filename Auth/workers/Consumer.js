@@ -1,9 +1,9 @@
 const amqp = require('amqplib')
 const config = require('../config/rabbit')
-const { productProcessor } = require('../processor');
+const {userProcessor } = require('../processor');
 
 const processors = {
-    "NewUser": productProcessor.saveUser,
+    "saveuser": userProcessor.saveUser,
 };
 
 
@@ -12,11 +12,11 @@ class Consumer {
         const connection = await amqp.connect(config.rabbitMQ.url)
         const channel = await connection.createChannel();
 
-        await channel.assertExchange("authExchange", "direct");
+        await channel.assertExchange("UserExchange", "direct");
 
         const q = await channel.assertQueue("UserQueue");
 
-        await channel.bindQueue(q.queue, "authExchange", "Signup");
+        await channel.bindQueue(q.queue, "UserExchange", "SignUpdone");
 
         channel.consume(q.queue, async (msg) => {
             

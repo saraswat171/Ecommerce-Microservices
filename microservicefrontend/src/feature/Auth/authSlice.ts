@@ -41,18 +41,20 @@ export const authSlice = createSlice({
                 state.isLoading = true;
                 state.error = null;
                 state.logged = false;
+                state.success=false;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.logged = true;
                 state.user = action.payload.user;
-              
+                state.success=true;
                 state.token = action.payload.token;
             })
             .addCase(loginUser.rejected, (state: any, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
                 state.logged = false;
+                state.success=false;
             })
             .addCase(logoutUser.pending, (state,) => {
                 state.isLoading = true;

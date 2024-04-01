@@ -9,13 +9,14 @@ class Producer {
         this.channel = await connection.createChannel();
     }
 
-    async publishMessage(routingKey, message) {
+    async publishMessage(routingKey, message , signature) {
+       
         if (!this.channel) {
             await this.createChannel()
         }
         const exchangeName = config.rabbitMQ.exchangeName;
         await this.channel.assertExchange(exchangeName, "direct");
-
+        const properties = { type: signature };
         const authDetails = {
             logType: routingKey,
             message: message,
@@ -24,10 +25,11 @@ class Producer {
         await this.channel.publish(
             exchangeName,
             routingKey,
-            Buffer.from(JSON.stringify({ authDetails }))
+            Buffer.from(JSON.stringify(authDetails )),
+            properties
         );
 
-        console.log(`the message ${message} is sent to exchange ${exchangeName} and routing key is ${routingKey}`);
+        console.log(`the message ${message} is sent to exchange ${exchangeName} and routing key is ${routingKey} prop is ${properties?.type}`);
     }
 
 }

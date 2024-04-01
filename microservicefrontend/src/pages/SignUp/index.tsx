@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import signupPic from '../../assests/images/singupPic.png'
 import { FormData, UserSchema } from './types';
-import { Button, Paper, Stack, Typography } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../../feature/Auth/authAction';
@@ -26,25 +26,32 @@ export default function Signup() {
     });
 
     const onSubmit = async (data: FormData) => {
-        console.log("SUCCESS", data);
-    
-    dispatch(signUpUser(data));
-   
-}
-React.useEffect(() => {
-    if (error) {
-        alert(`Error: ${error}`)
-        dispatch(toggleerror())
-    }
-}, [error])
+        data.role=role;
+        console.log('data: ', data);
 
-useEffect(() => {
-    if (success) {
-        alert('SignUp success')
-        dispatch(toggleSuccess())
-        navigate('/');
+
+        dispatch(signUpUser(data));
+
     }
-}, [success])
+    const [role, setrole] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setrole(event.target.value as string);
+    };
+    React.useEffect(() => {
+        if (error) {
+            alert(`Error: ${error}`)
+            dispatch(toggleerror())
+        }
+    }, [error])
+
+    useEffect(() => {
+        if (success) {
+            alert('SignUp success')
+            dispatch(toggleSuccess())
+            navigate('/');
+        }
+    }, [success])
 
     return (
         <Box
@@ -85,7 +92,7 @@ useEffect(() => {
                         alignItems={"flex-start"}
                         justifyContent={"center"}
                     >
-                        <Typography sx={{ fontSize: "20px", fontWeight: "bold", mb: 4 }}>
+                        <Typography sx={{ fontSize: "20px", fontWeight: "bold", mb: 2 }}>
                             Create your Free Account
                         </Typography>
 
@@ -120,8 +127,29 @@ useEffect(() => {
                             register={register}
                             error={errors.confirmPassword}
                         />
+                        <FormControl sx={{
 
+                            bgcolor: "#faf9fb",
+                            width: "90%",
+                            borderRadius: "10px",
                           
+                            mb: 3,
+                        }}    >
+                            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={role}
+                                label="Role"
+                                onChange={handleChange}
+                              
+                            >
+                                <MenuItem value={'user'}>User</MenuItem>
+                                <MenuItem value={'Vendor'}>Vendor</MenuItem>
+                                <MenuItem value={"Delivery man"}>Delivery man</MenuItem>
+                            </Select>
+                        </FormControl>
+
                         <Button
                             color="primary"
                             variant="contained"
@@ -133,7 +161,7 @@ useEffect(() => {
                                 width: "90%",
                                 fontWeight: "500",
                                 boxShadow: "none",
-                                mb: 4,
+                                mb: 2,
                             }}
                         >
                             Create Account
