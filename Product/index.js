@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 require("dotenv").config();
 const connectDB = require('./config/db');
-const Consumer = require('./workers/Consumer')
-const Producer = require('./workers/Producer')
+const Consumer = require('./worker/consumer')
+const Producer = require('./worker/producer')
 
 connectDB()
 const app = express();
@@ -19,6 +19,6 @@ const consumer = new Consumer();
 consumer.consumeMessage()
 
 app.use('/', require('./routes'))
-app.listen(8085, () => {
-    console.log(`App is running on port 8085`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
